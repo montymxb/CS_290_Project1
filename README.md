@@ -35,7 +35,8 @@ Resistor Calculator Project
     - [Blog about setting up your first Node.js server](https://blog.risingstack.com/your-first-node-js-http-server/)
         - <strong>This shows you how to actually set up a server with express</strong>
 
-## Instructions for setting this up (db & server) will be provided here so everyone can have this running on their own machines as needed.
+## Instructions for setting this up
+#### So everyone can have this running on their own machines as needed.
 
 1. install dependencies via npm (from the terminal)
     - `$npm install` // will use package.json 'dependencies' to set this up
@@ -44,3 +45,29 @@ Resistor Calculator Project
 3. server will start running and will indicate so on the command line
 4. Visit http://localhost:5000 in your browser to see the resulting page
 5. To stop the server hit Ctrl-C to stop the process, this will kill the server
+
+## Explanation of the layout
+In the project you'll see something like the following
+- server.js
+- public
+    - css
+        - style.css
+    - html
+        - index.html
+    - js
+        - client.js
+- node_modules
+    - lots of stuff in here, i'll explain shortly...
+- .gitignore
+- package.json
+- README.md
+
+The **server.js** file is the starting point of the server. Here an express application is setup to receive requests and 'serve' the appropriate content. You can see that for the '/' (or root) request it will serve the static **index.html** file. Note that html,css, and JS files are all within the **public** directory, as this content is meant to be accessible by anyone.
+
+The **node_modules** folder is automatically generated & managed by npm. Here the dependencies for this project are stored, as stated in package.json. Note that it will generally contain a lot more than just what you are depending on directly, since other projects will also have dependencies, and their dependencies may have dependencies, and so on and so forth.
+
+The **.gitignore** file is used to tell **git** what _not_ to track when version controlling this project. In particular it will exclude the folder node_modules & it's contents. This should be setup locally and not committed to the repository on github. Keeping these dependent projects out of version control directly decreases the size of this project when cloning, it also ensures that a user only needs to run **npm install** to get things setup every time.
+
+The setup for serving index.html is fine for basic websites, but if we want to have a section that only logged in users can access we'll have to do a bit more. In that case we'll need to setup the server to verify that a user is logged in, and if they are forward them to a page that verifies that they are logged in. This is where server side scripting comes into play.
+
+To demonstrate the concept of restricting a user you can checkout the 'login' and 'authenticated' endpoints that are listed. These can both be reached by hitting http://localhost:5000/login & http://localhost:5000/authenticated. Hitting authenticated when not already setup will show an error, and redirect you back to the login after 5 seconds. The login page just has a username field & a simple button to login as a demonstration. Upon logging in you will be taken to the the authenticated page, with a welcome message displaying your username and the option to logout.
