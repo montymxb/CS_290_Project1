@@ -35,4 +35,12 @@ Resistor Calculator Project
     - [Blog about setting up your first Node.js server](https://blog.risingstack.com/your-first-node-js-http-server/)
         - <strong>This shows you how to actually set up a server with express</strong>
 
-Instructions for setting this up (db & server) will be provided here so everyone can have this running on their own machines as needed.
+## Instructions for setting this up (db & server) will be provided here so everyone can have this running on their own machines as needed.
+
+1. install dependencies via npm (from the terminal)
+    - `$npm install` // will use package.json 'dependencies' to set this up
+2. start the server (can use npm to manage this)
+    - `$npm start`
+3. server will start running and will indicate so on the command line
+4. Visit http://localhost:5000 in your browser to see the resulting page
+5. To stop the server hit Ctrl-C to stop the process, this will kill the server
