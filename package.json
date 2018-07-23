@@ -19,6 +19,7 @@
   "homepage": "https://github.com/montymxb/CS_290_Project1#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "express-session": "^1.15.6"
   }
 }

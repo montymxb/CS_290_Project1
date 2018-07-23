@@ -4,6 +4,12 @@ const express = require('express')
 // Requires 'body-parser' dependency, this will be used to parse the data for a login request
 const bodyParser = require("body-parser");
 
+// Requires 'express-session', a dependency for using sessions with express
+// Sessions are tracked states of a server interacting with an individual user over time.
+// Each session is for each user, uniquely, and cookies are used to allow the user to identify their 'session key'
+// that uniquely identifies their own session. It's like your OSU ID# uniquely identifying you.
+const express_session = require('express-session');
+
 // Requires the 'path' dependency, which is built in by default (although we still need to require it)
 const path = require('path')
 
@@ -21,6 +27,11 @@ const port = 5000
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// configure our session secret
+app.use(express_session({
+	secret: 'secret_session_key'
+}));
+
 // Shows serving a static file for a response to http://localhost:5000/
 app.get('/', (request, response) => {
    // respond with the index.html page to start with...
@@ -31,14 +42,28 @@ app.get('/', (request, response) => {
 // Shows serving a 'login' page (also a static file) when the user visits
 // http://localhost:5000/login
 app.get('/login', (request, response) => {
-	console.log("login page served...");
-	response.sendFile(path.join(__dirname + '/public/html/login.html'));
+	if(request.session.username) {
+		// redirect to authenticated page
+		console.log("already authenticated user visited login, redirecting to authenticated...");
+		response.redirect('/authenticated');
+
+	} else {
+		console.log("login page served...");
+		response.sendFile(path.join(__dirname + '/public/html/login.html'));
+
+	}
 });
 
 // handles a POST request to login, just forwards to 'authenticated'
 app.post('/login', (request, response) => {
 	console.log("user "+request.body.username + " logging in...");
-	response.redirect('/authenticated?username=' + request.body.username);
+
+	// get this user's session and set their username to it
+	let session = request.session;
+	session.username = request.body.username;
+
+	// redirect to the authenticated page
+	response.redirect('/authenticated');
 });
 
 // Shows serving an 'authenticated' page when the user visits
@@ -48,7 +73,7 @@ app.post('/login', (request, response) => {
 app.get('/authenticated', (request, response) => {
 	console.log("processing authenticated request...");
 	let html = "";
-	if(!request.query.username) {
+	if(!request.session.username) {
 		console.log("NOT authenticated...");
 		// not authenticated
 		html = "<!DOCTYPE html>\
@@ -74,7 +99,7 @@ app.get('/authenticated', (request, response) => {
 			<title>Authenticated</title>\
 		</head>\
 		<body>\
-			<h1>Welcome " + request.query.username + "!</h1>\
+			<h1>Welcome " + request.session.username + "!</h1>\
 			<form action='logout' method='GET'><input type='submit' value='Logout!'></form>\
 		</body>\
 		</html>";
@@ -87,6 +112,10 @@ app.get('/authenticated', (request, response) => {
 // Redirects to the login page
 app.get('/logout', (request, response) => {
 	console.log("logging out...");
+
+	// unset the username for this session, logging them out...
+	request.session.username = null;
+
 	response.redirect('/login');
 });
 
