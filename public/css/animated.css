@@ -1,0 +1,69 @@
+/* This is some css to show animated stuff */
+
+#animated-ring-1 {
+	width: 31px;
+	height: 31px;
+	display: block;
+	margin: 8px auto;
+	padding: 0;
+	border-color: #0c6;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 31px;
+	animation: animation1 forwards 4s infinite ease;
+}
+
+@keyframes animation1 {
+	0% {
+		transform: rotate(0deg);
+		/*border-radius: 0;*/
+		border-color: #6cf;
+	}
+	90% {
+		/*border-radius: 25px;*/
+		border-color: #0c6;
+	}
+	95% {
+		border-color: #f06;
+	}
+	100%  {
+		/*border-radius: 0;*/
+		border-color: #6cf;
+		transform: rotate(360deg);
+		background: #0c6;
+	}
+}
+
+#animated-ring-2 {
+	display: block;
+	width: 25px;
+	height: 25px;
+	margin: 3px 3px;
+	padding: 0;
+	animation: animation2 forwards 4s infinite ease;
+	background: #000;
+	border-radius: 25px;
+	text-align: center;
+	line-height: 1.7;
+	color: #fff;
+}
+
+@keyframes animation2 {
+	0% {
+		transform: rotate(0deg);
+		/*border-radius: 0;*/
+		background: #6cf;
+	}
+	90% {
+		background: #0c6;
+		/*border-radius: 25px;*/
+	}
+	95% {
+		background: #f06;
+	}
+	100%  {
+		/*border-radius: 0;*/
+		background: #6cf;
+		transform: rotate(360deg);
+	}
+}
