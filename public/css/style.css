@@ -1,0 +1,147 @@
+/* clears body styling */
+body {
+	margin: 0;
+	font-family: 'Avenir Next', sans-serif;
+}
+
+/* Navbar styling */
+#navbar {
+	width: 100vw;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	box-shadow: 0 2px 2px #000;
+	position: fixed;
+	top: 0;
+	background: #fff;
+}
+
+#navbar-padder {
+	height: 50px;
+}
+
+#navbar a {
+	float: right;
+	text-decoration: none;
+	color: #000;
+	transition: 0.3s;
+	text-align: center;
+	margin: 15px;
+	width: 80px;
+}
+
+#navbar a:hover {
+	color: #6cf;
+	border-color: #6cf;
+}
+
+#navbar a#home-link {
+	float: left;
+}
+
+#navbar-button {
+	display: none;
+}
+
+@media(max-width: 550px) {
+	#navbar {
+		display: block;
+    	height: 100vh;
+    	width: 100vw;
+    	left: -100vw;
+    	background: #000;
+    	opacity: 0.93;
+    	color: #fff;
+    	transition: 0.3s;
+    	z-index: 100;
+	}
+
+	#navbar-padder {
+		height: 0;
+	}
+
+	#navbar a#home-link {
+		margin-top: 50px;
+		float: none;
+	}
+
+	#navbar a {
+		display: block;
+		color: #fff;
+		border-style: none none solid none;
+		border-width: 2px;
+		border-color: #fff;
+		float: none;
+		width: auto;
+		height: 30px;
+	}
+
+	#navbar a:hover {
+		border-color: #6cf;
+		background: #0a0a0a;
+	}
+
+	.navbar-display {
+		left: 0 !important;
+	}
+
+	#navbar-button {
+		display: block;
+		float: right;
+		margin: 0;
+		width: 50px;
+		height: 50px;
+		border: solid 2px #000;
+		border-radius: 0 0 8px 0;
+		color: #000;
+		background: #fff;
+		text-align: center;
+		transition: 0.3s;
+		font-size: 20px;
+		z-index: 1000;
+		position: fixed;
+		top: 0;
+	}
+
+	#navbar-button:hover {
+		cursor: pointer;
+		background: #000;
+		color: #fff;
+	}
+}
+
+/* Content wrapper */
+#content {
+	min-height: 85vh;
+	margin: 0 4px 0 4px;
+}
+
+
+/* Footer */
+#footer {
+	width: 100vw;
+	min-height: 200px;
+	margin: 0;
+	padding: 0;
+	background: #0f0f0f;
+	color: #fff;
+}
+
+#footer-content-wrapper {
+	padding: 8px;
+	text-align: center;
+}
+
+#footer-content-wrapper p {
+	font-weight: 100;
+	color: #f0f0f0;
+}
+
+#example-box {
+	display: block;
+	margin: 8px auto;
+	padding: 8px;
+	background: #f0f0f0;
+	border-radius: 8px;
+	max-width: 500px;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<title>Template Webpage</title>
+</head>
+<body>
+
+	<!--Navbar start-->
+	<div id="navbar">
+		<a id="home-link" href="index">Home Link</a>
+		<a href="link1">link1</a>
+		<a href="link2">link2</a>
+		<a href="link3">link3</a>
+	</div>
+	<button id="navbar-button" onclick="toggleMobileNav()" title="Toggle Menu">@</button>
+	<div id="navbar-padder"></div>
+	<!--Navbar end-->
+
+	<div id="content">
+		<!--Your Content Starts Here (can replace what's below)-->
+		<div id="example-box">
+			<h1 style="text-align:center">Template Page</h1>
+			<h3 style="text-align:center">Your page content should go here</h3>
+			<ul>
+				<li>Your CSS files should be added to public/css</li>
+				<li>Your JS files (client, NOT for node.js) should be added to public/html</li>
+				<li>Your HTML should be added to public/html (server will control access to these in the case of authentication)</li>
+				<li>This template can be used to build up your page, all the content will be fitted inside here.</li>
+				<li>Some basic CSS to style the navbar, footer and this page are included in public/css/style.css</li>
+				<li>JS to allow the mobile version of the navbar to work is in public/js/client.js</li>
+				<li>The navbar here can be setup with your own links, and it's already mobile optimized (try shrinking the screen to a phone-ish size to see)</li>
+			</ul>
+		</div>
+		<!--Your Content Ends Here-->
+	</div>
+
+	<div id="footer">
+		<div id="footer-content-wrapper">
+			<p>CS 290 Resistor Project, 2018</p>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/client.js"></script>
+</body>
+</html>

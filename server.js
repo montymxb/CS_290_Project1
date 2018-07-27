@@ -32,6 +32,10 @@ app.use(express_session({
 	secret: 'secret_session_key'
 }));
 
+// Used to make all files from directories in 'public' available upon request
+app.use(express.static('public'));
+
+
 // Shows serving a static file for a response to http://localhost:5000/
 app.get('/', (request, response) => {
    // respond with the index.html page to start with...
@@ -54,6 +58,12 @@ app.get('/login', (request, response) => {
 	}
 });
 
+// Shows serving the 'template' page
+// http://localhost:5000/template
+app.get('/template', (request, response) => {
+	response.sendFile(path.join(__dirname + '/public/html/template.html'));
+});
+
 // handles a POST request to login, just forwards to 'authenticated'
 app.post('/login', (request, response) => {
 	console.log("user "+request.body.username + " logging in...");
@@ -61,6 +71,8 @@ app.post('/login', (request, response) => {
 	// get this user's session and set their username to it
 	let session = request.session;
 	session.username = request.body.username;
+
+	// password check here....
 
 	// redirect to the authenticated page
 	response.redirect('/authenticated');
