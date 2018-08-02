@@ -1,0 +1,31 @@
+doctype html
+html
+
+  // head
+  head
+    meta(charset='utf-8')
+    link(href='css/style.css', type='text/css', rel='stylesheet')
+    link(href='css/animated.css', type='text/css', rel='stylesheet')
+    title Template Webpage
+    
+  body
+
+    // navbar
+    #navbar
+        a#home-link(href='index') Home Link
+        a(href='link1') Link 3
+        a(href='link2') Link 2
+        a(href='link3') Link 1
+    button#navbar-button(onclick='toggleMobileNav()', title='Toggle Menu') @
+    #navbar-padder
+
+    // content
+    #content
+      #example-box
+        block content
+
+    // footer
+    #footer
+      #footer-content-wrapper
+        p CS 290 Resistor Project, 2018
+    script(type='text/javascript', src='js/script.js')

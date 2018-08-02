@@ -16,6 +16,16 @@ const path = require('path')
 // instantiate an 'app' from express()
 const app = express()
 
+const loginRouter = require("./routes/login")
+const homeRouter = require("./routes/home")
+const calculateRouter = require("./routes/calculate")
+const yourHistoryRouter = require("./routes/yourhistory")
+const history = require("./routes/history")
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 // setup an arbitrary port to serve from. By convention port 80 is HTTP, and 443 is HTTPS.
 // You usually don't see this, but entering http://localhost and http://localhost:80 are synonymous.
 // Using port 5000 is arbitrary, any unused port will do, and you can change it to something else to see that it does this.
@@ -61,7 +71,10 @@ app.get('/login', (request, response) => {
 // Shows serving the 'template' page
 // http://localhost:5000/template
 app.get('/template', (request, response) => {
-	response.sendFile(path.join(__dirname + '/public/html/template.html'));
+	// USE HTML TEMPLATE FILE
+	//response.sendFile(path.join(__dirname + '/public/html/template.html'));
+	// USE PUG TEMPLATE FILE
+	response.render('template');
 });
 
 // handles a POST request to login, just forwards to 'authenticated'
