@@ -71,8 +71,6 @@ app.get('/login', (request, response) => {
 // Shows serving the 'template' page
 // http://localhost:5000/template
 app.get('/template', (request, response) => {
-	// USE HTML TEMPLATE FILE
-	//response.sendFile(path.join(__dirname + '/public/html/template.html'));
 	// USE PUG TEMPLATE FILE
 	response.render('template');
 });

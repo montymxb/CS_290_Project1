@@ -1,0 +1,30 @@
+<!--
+This is an example template.html file.
+I've gone ahead and generated the equivalent in PUG for you guys (over in view/template.pug).
+Via pug the base (header, navbar & footer) are all injected, so your actual content only needs to be added in the given file.
+Doing it this way you guys have a choice of using this html template or the PUG one, whichever works best for you.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<link href="css/animated.css" type="text/css" rel="stylesheet">
+	<title>Template Webpage</title>
+</head>
+<body>
+
+	<!--Navbar start-->
+	<div id="navbar">
+		<a id="home-link" href="index">Home Link</a>
+		<a href="link1">Link 3</a>
+		<a href="link2">Link 2</a>
+		<a href="link3">Link 1</a>
+	</div>
+	<button id="navbar-button" onclick="toggleMobileNav()" title="Toggle Menu">@</button>
+	<div id="navbar-padder"></div>
+	<!--Navbar end-->
+
+	<div id="content">
+		<!--Your Content Starts Here (can replace what's below)-->
+		<div id="example-box">
