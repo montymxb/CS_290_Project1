@@ -20,7 +20,10 @@ const loginRouter = require("./routes/login")
 const homeRouter = require("./routes/home")
 const calculateRouter = require("./routes/calculate")
 const yourHistoryRouter = require("./routes/yourhistory")
-const history = require("./routes/history")
+const historyRouter = require("./routes/history")
+
+// MySQL Library
+const mysql = require('mysql2')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +47,10 @@ app.use(express_session({
 
 // Used to make all files from directories in 'public' available upon request
 app.use(express.static('public'));
+
+
+// Routers
+app.use('/', yourHistoryRouter);
 
 
 // Shows serving a static file for a response to http://localhost:5000/
