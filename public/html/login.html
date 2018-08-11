@@ -5,10 +5,13 @@
 	<link href="css/style.css"/>
 </head>
 <body>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 	<h3>Please login</h3>
 	<form action="/login" method="POST">
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
 		<input name="username" type="text" placeholder="Username here">
 		<input type="submit" value="Login">
-	</form>
+	</form> 
 </body>
 </html>
