@@ -5,13 +5,14 @@
 	<link href="css/style.css"/>
 </head>
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<h3>Please login</h3>
 	<form action="/login" method="POST">
+		<meta name="google-signin-client_id" content="1052113773074-v9n86g17t7kc4e6bf3g2u0j37qvaig1s.apps.googleusercontent.comm">
 		<div class="g-signin2" data-onsuccess="onSignIn"></div>
 		<input name="username" type="text" placeholder="Username here">
 		<input type="submit" value="Login">
+</script>
 	</form> 
 </body>
 </html>
