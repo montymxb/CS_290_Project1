@@ -18,7 +18,7 @@ Doing it this way you guys have a choice of using this html template or the PUG 
 	<div id="navbar">
 		<a id="home-link" href="index">Home Link</a>
 		<a href="link1">Link 3</a>
-		<a href="lookup">Parts</a>
+		<a href="link2">Link 2</a>
 		<a href="link3">Link 1</a>
 	</div>
 	<button id="navbar-button" onclick="toggleMobileNav()" title="Toggle Menu">@</button>
@@ -30,16 +30,14 @@ Doing it this way you guys have a choice of using this html template or the PUG 
 		<div id="example-box">
 			<h1 style="text-align:center">Template Page</h1>
 			<h3 style="text-align:center">Your page content should go here</h3>
-			<ul>
-				<li>Your CSS files should be added to public/css</li>
-				<li>Your JS files (client, NOT for node.js) should be added to public/html</li>
-				<li>Your HTML should be added to public/html (server will control access to these in the case of authentication)</li>
-				<li>This template can be used to build up your page, all the content will be fitted inside here.</li>
-				<li>Some basic CSS to style the navbar, footer and this page are included in public/css/style.css</li>
-				<li>JS to allow the mobile version of the navbar to work is in public/js/client.js</li>
-				<li>The navbar here can be setup with your own links, and it's already mobile optimized (try shrinking the screen to a phone-ish size to see)</li>
-				<li>The spinning thing below is just some fun animated thing I whipped up. Completely done in CSS with no JS involved. You can see the associated CSS in public/css/animated.css</li>
-			</ul>
+
+
+      <form method="GET" action="/template" autocomplete="on">
+          <div class="form-group"><label for="part"> Part Name</label><input class="form-control" id="part" type="text" name="part" placeholder="Enter a part" /></div>
+          <div class="form-group"><button class="btn btn-primary" type="submit">Submit</button></div>
+      </form>
+
+
 			<!--Some silly animated thing, related css can be found in public/css/animated.css-->
 			<div id="animated-ring-1">
 				<div id="animated-ring-2">••</div>
