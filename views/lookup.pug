@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  h1(style='text-align:center') Parts Lookup Page
+    h3(style='text-align:center') Enter the name of electric part
+    <BR>
+    
+    form(method="GET", action="./lookup/formGet",autocomplete='on')
+      .form-group
+        label(for="part")  Part Name
+        input#part.form-control(type="text", name="part", placeholder="Enter a part name. EX: resistors")
+      .form-group
+        button.btn.btn-primary(type="submit") Submit
+    <BR>
+    
+    h1 #{msg}
+    
+    table(style='width:100%')
+      tr
+        th #{brand}
+        th #{price}
+        th #{mpn}
+        //th #{url}
+      tr
+        td #{b1}
+        td #{p1}
+        td #{m1}
+        //td #{u1}
+      tr
+        td #{b2}
+        td #{p2}
+        td #{m2}
+        //td #{u2}
+      tr
+        td #{b3}
+        td #{p3}
+        td #{m3}
+        //td #{u3}
+      tr
+        td #{b4}
+        td #{p4}
+        td #{m4}
+        //td #{u4}
+      tr
+        td #{b5}
+        td #{p5}
+        td #{m5}
+        //td #{u5}    
+        
+    // Some silly animated thing, related css can be found in public/css/animated.css
+    #animated-ring-1
+      #animated-ring-2 ••

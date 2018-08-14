@@ -21,9 +21,7 @@ const homeRouter = require("./routes/home")
 const calculateRouter = require("./routes/calculate")
 const yourHistoryRouter = require("./routes/yourhistory")
 const historyRouter = require("./routes/history")
-
-// MySQL Library
-const mysql = require('mysql2')
+const lookup = require("./routes/lookup")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -158,3 +156,5 @@ app.listen(port, (err) => {
   }
   console.log(`Server is listening on port ${port}`)
 })
+
+app.use('/lookup',lookup);
