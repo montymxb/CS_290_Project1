@@ -4,6 +4,23 @@
       var resistanceValue;
       var toleranceValue;
 
+      function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+/*        xhttp.onreadystatechange = function() {
+
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML = this.responseText;
+          }
+        };
+*/
+        xhttp.open("POST", "calculate", true);
+
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhttp.send("fname="+resistanceValue+"&lname="+toleranceValue);
+        
+      }
+
       function mantissa(band1, band2) {
         function getVal(color) {
           if (color === "black") {
@@ -115,7 +132,7 @@
         document.getElementById("myDropdown4").classList.toggle("show");
       }
 
-      // Close the dropdown menu if the user clicks outside of it
+
       window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
 
@@ -133,15 +150,15 @@
       function calculate(ba1, ba2, ba3, ba4) {
         var omega = resistance(ba1, ba2, ba3);
         var delta = tolerance(ba4, omega);
+        resistanceValue = omega;
+        toleranceValue = delta;
         document.getElementById("resval").innerHTML = omega;
         document.getElementById("tolval").innerHTML = delta;
       }
 
 
-      //need to make it so that it will work for all 4 drop downs
-      //currently only works for the first one
+
       function pressb1(n) {
-        //sets current color
         if (n == 1) {
           document.getElementById("b1color").innerHTML = "black";
         } else if (n == 2) {
@@ -164,13 +181,11 @@
           document.getElementById("b1color").innerHTML = "white";
         }
 
-        //currently these are not passing vlaid inputs
-        //not yet sure why
+
         var c1 = document.getElementById("b1color").innerHTML;
         var c2 = document.getElementById("b2color").innerHTML;
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
-        //figuringout what is getting passed
         document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }
@@ -238,13 +253,10 @@
           document.getElementById("b3color").innerHTML = "silver";
         }
 
-        //currently these are not passing vlaid inputs
-        //not yet sure why
         var c1 = document.getElementById("b1color").innerHTML;
         var c2 = document.getElementById("b2color").innerHTML;
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
-        //figuringout what is getting passed
         document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }
