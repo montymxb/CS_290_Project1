@@ -1,8 +1,8 @@
 extends layout
 
 block content
-	each val in #{history}
+	each val in history
 		div
-			h4 val.resistance
-			span val.createdAt
+			h4 {val.resistance}
+			span {val.createdAt}
 			br
