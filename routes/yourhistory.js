@@ -9,18 +9,23 @@ const express = require('express')
 const historyRouter = express.Router()
 const mysql = require('mysql2')
 
-const credentials = require('./../config/credentials.json')
+const db = require('../models/db')
 
 historyRouter.get('/yourhistory', function(req, res) {
 
-	// query DB for last 100 entries this user created
-	const connection = mysql.createConnection(credentials)
+	db.getUserHistory({
+		success: function(results) {
+			// show history
+			console.dir(results);
+			res.render("yourhistory.pug", {history: results})
 
-	connection.query("SELECT * FROM History ORDER BY createdAt ASC LIMIT 100", function(err, results, fields) {
-		// add these entries to the PUG template
-		res.render("history", {history: results})
+		},
+		failure: function(error) {
+			// failed, don't show any history
+			res.render("yourhistory.pug", {history: {}})
 
+		}
 	})
-});
+})
 
 module.exports = historyRouter

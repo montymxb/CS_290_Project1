@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	h1(style='text-align:center') Your Past Lookups
+	if !history.length
+		div
+			h4#nothing-found No history found!
+			span#nothing-found-descrip <a href="calculate">Calculate a resistance value first</a> to get information here.
+	each val in history
+		div.history-cell
+			p.hist-created #{val.createdAt}
+			.resistor-small-stub-left
+			.resistor-small
+				each color in val.colors.split(',')
+					span.band(style=`background:${color}`)
+			.resistor-small-stub-right
+			p.hist-resistance #{val.resistance} ohms
+			p.hist-tolerance #{val.tolerance} tolerance
+			br

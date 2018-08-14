@@ -48,15 +48,18 @@ app.use(express.static('public'));
 
 
 // Routers
+app.use('/', homeRouter);
 app.use('/', yourHistoryRouter);
 
 
 // Shows serving a static file for a response to http://localhost:5000/
+/*
 app.get('/', (request, response) => {
    // respond with the index.html page to start with...
    console.log("index served...");
    response.sendFile(path.join(__dirname + '/public/html/index.html'));
 })
+*/
 
 // Shows serving a 'login' page (also a static file) when the user visits
 // http://localhost:5000/login

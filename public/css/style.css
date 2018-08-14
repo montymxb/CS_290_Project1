@@ -145,3 +145,81 @@ body {
 	border-radius: 8px;
 	max-width: 500px;
 }
+
+/** Your History Styling **/
+
+#nothing-found {
+	text-align: center;
+	font-size: 24px;
+}
+
+#nothing-found-descrip {
+	display: block;
+	text-align: center;
+	font-size: 16px;
+}
+
+.hist-resistance {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.hist-tolerance {
+
+}
+
+.hist-created {
+	float: right;
+	font-size: 10px;
+}
+
+.history-cell {
+	background: #fff;
+	margin: 4px;
+	padding: 4px;
+	border-radius: 4px;
+}
+
+/** Small Resistor Visual **/
+.resistor-small-stub-left {
+	display: inline-block;
+	width: 15px;
+	height: 10px;
+	background: #c0c0c0;
+	margin-bottom: 15px;
+}
+
+.resistor-small-stub-right {
+	display: inline-block;
+	width: 15px;
+	height: 10px;
+	background: #c0c0c0;
+	margin-bottom: 15px;
+}
+
+@media(max-width: 600px) {
+	.resistor-small-stub-left {
+		display: none;
+	}
+	.resistor-small-stub-right {
+		display: none;
+	}
+}
+
+.resistor-small {
+	display: inline-block;
+	background: #fff;
+	min-width: 50px;
+	height: 40px;
+	border: 2px solid #c0c0c0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.resistor-small .band {
+	display: inline-block;
+	width: 10px;
+	height: 100%;
+	background: #000;
+	margin: 0 8px;
+}
