@@ -1,0 +1,73 @@
+doctype html
+html
+
+  // head
+  head
+    meta(charset='utf-8')
+    base(href='/')
+    link(href='css/style.css', type='text/css', rel='stylesheet')
+    link(href='css/animated.css', type='text/css', rel='stylesheet')
+    link(href='css/form.css', type='text/css', rel='stylesheet')
+    link(href='css/login.css', type='text/css', rel='stylesheet')
+    title= title
+
+    style.
+      .dropbtn {
+      background-color: #3498DB;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      }
+      .dropbtn:hover,
+      .dropbtn:focus {
+      background-color: #2980B9;
+      }
+      .dropdown {
+      position: relative;
+      display: inline-block;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      }
+      .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      }
+      .dropdown-content a:hover {
+      background-color: #ddd
+      }
+      .show {
+      display: block;
+      }
+    script(type='text/javascript', src='js/calculator.js')
+
+  body
+
+    // navbar
+    #navbar
+        a#home-link(href='/') Home
+        a(href='yourhistory',title='See your past resistor lookups.') History
+        a(href='lookup',title='Lookup parts.') Parts
+        a(href='calculate',title='Calculate a resistance value.') Calculate
+    button#navbar-button(onclick='toggleMobileNav()', title='Toggle Menu') @
+    #navbar-padder
+
+    // content
+    #content
+      #example-box
+        block content
+
+    // footer
+    #footer
+      #footer-content-wrapper
+        p CS 290 Resistor Project, 2018
+    script(type='text/javascript', src='js/script.js')

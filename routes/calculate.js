@@ -12,7 +12,15 @@ const mysql = require('mysql2')
 const db = require('../models/db')
 
 historyRouter.get('/calculate', function(req, res) {
-	res.render("calculator.pug", {title: "Calculate | Calculance"})
+    db.getCurrentUser({token: req.sessionID},{
+    	success: function() {
+            res.render("calculator.pug", {title: "Calculate | Calculance"})
+		},
+		failure: function() {
+    		// back to login
+			res.redirect('/login')
+		}
+	})
 })
 
 
@@ -48,18 +56,47 @@ historyRouter.post('/calculate', function(req, res) {
 	//resistanceValue
 	//toleranceValue
 	// get the current user
-	getCurrentUser({
+
+	db.getCurrentUser({
 		token: req.sessionID
 	}, {
 		success: function(data) {
+			if(!data[0].id) {
+				throw "Missing 'id' in calc request!"
+			}
+
+			if(!req.body.resistanceValue) {
+				throw "Missing resistance value in calc request!"
+			}
+
+			if(!req.body.toleranceValue) {
+				throw "Missing tolerance value in calc request!"
+			}
+
+			if(!req.body.globalBand1) {
+				throw "Missing global band 1 in calc request!"
+			}
+
+            if(!req.body.globalBand2) {
+                throw "Missing global band 2 in calc request!"
+            }
+
+            if(!req.body.globalBand3) {
+                throw "Missing global band 3 in calc request!"
+            }
+
+            if(!req.body.globalBand4) {
+                throw "Missing global band 4 in calc request!"
+            }
+
 			// add this historical lookup entry
-			addHistory({
-				user_id: data.user_id,
+			db.addHistory({
+				user_id: data[0].id,
 				resistance: req.body.resistanceValue,
 				tolerance: req.body.toleranceValue,
 				colors: convertToHex(req.body.globalBand1) + "," + convertToHex(req.body.globalBand2) + "," + convertToHex(req.body.globalBand3) + "," + convertToHex(req.body.globalBand4)
 			})
-			
+
 		},
 		failure: function(err) {
 			// failure

@@ -178,12 +178,11 @@ function loginUser(data, callback) {
 		} else {
 			// create a new user first
 			_preparedQuery("INSERT INTO users (createdAt,username,token) VALUES (NOW(),?,?)", [data.username, data.token], {
-				success:function(data) {
+				success:function() {
 					// get user_id for this newly created user now
 					_preparedQuery("SELECT id FROM users WHERE username=?", [data.username], {
-						success: function(data) {
-							console.dir(data)
-							let user_id = data.id
+						success: function(results) {
+                            let user_id = results[0].id
 							// clean up existing sessions, just in case
 							_preparedQuery("DELETE FROM sessions WHERE user_id=?", [user_id], {
 								success: function() {
@@ -217,13 +216,18 @@ function getCurrentUser(data, callback) {
 
 	_preparedQuery("SELECT user_id FROM sessions WHERE token=?", [data.token], {
 		success: function(resp) {
-			// return this user's data
-			_preparedQuery("SELECT * FROM users WHERE id=? LIMIT 1", [resp.user_id], callback)
+			if(resp.length > 0) {
+                // return this user's data
+                _preparedQuery("SELECT * FROM users WHERE id=? LIMIT 1", [resp[0].user_id], callback)
+
+            } else {
+				callback.failure({error: "No matching user found for the current session: "+data.token})
+			}
 
 		},
 		failure: function(error) {
 			// indicate this failed at some point
-			callback.failure({error: "No user currently logged in!"});
+			callback.failure({error: "No user currently logged in for token: "+data.token});
 		}
 	})
 }

@@ -154,6 +154,7 @@
         toleranceValue = delta;
         document.getElementById("resval").innerHTML = omega;
         document.getElementById("tolval").innerHTML = delta;
+        loadDoc();
       }
 
 
@@ -186,7 +187,7 @@
         var c2 = document.getElementById("b2color").innerHTML;
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
-        document.getElementById("testing").innerHTML = c1;
+        //document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }
 
@@ -221,7 +222,7 @@
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
         //figuringout what is getting passed
-        document.getElementById("testing").innerHTML = c1;
+        //document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }
 
@@ -257,7 +258,7 @@
         var c2 = document.getElementById("b2color").innerHTML;
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
-        document.getElementById("testing").innerHTML = c1;
+        //document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }
 
@@ -296,6 +297,6 @@
         var c3 = document.getElementById("b3color").innerHTML;
         var c4 = document.getElementById("b4color").innerHTML;
         //figuringout what is getting passed
-        document.getElementById("testing").innerHTML = c1;
+        //document.getElementById("testing").innerHTML = c1;
         calculate(c1, c2, c3, c4);
       }

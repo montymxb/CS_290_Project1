@@ -12,19 +12,19 @@ const db = require('../models/db')
 // handle GET to login
 loginRouter.get('/login', function(req, res) {
 
+	console.info("\n\nCurrent SessionID: "+req.sessionID+"\n\n");
+
 	db.getCurrentUser({
 		token: req.sessionID
 	}, {
 		success: function(data) {
-			if(data.length >= 1) {
-                // redirect to calculate
-                res.redirect('/calculate')
-            } else {
-				// render login page again, not currently logged in
-                res.render('login.pug', {title: "Login | Calculance"})
-			}
+            // redirect to calculate
+            res.redirect('/calculate')
+
 		},
 		failure: function(err) {
+			console.info("FAILED ON LOGIN VISIT")
+			console.dir(err)
 			// login page per normal
             res.render('login.pug', {title: "Login | Calculance"})
 		}
