@@ -73,19 +73,19 @@ historyRouter.post('/calculate', function(req, res) {
 				throw "Missing tolerance value in calc request!"
 			}
 
-			if(!req.body.globalBand1) {
+			if(!req.body.gb1) {
 				throw "Missing global band 1 in calc request!"
 			}
 
-            if(!req.body.globalBand2) {
+            if(!req.body.gb2) {
                 throw "Missing global band 2 in calc request!"
             }
 
-            if(!req.body.globalBand3) {
+            if(!req.body.gb3) {
                 throw "Missing global band 3 in calc request!"
             }
 
-            if(!req.body.globalBand4) {
+            if(!req.body.gb4) {
                 throw "Missing global band 4 in calc request!"
             }
 

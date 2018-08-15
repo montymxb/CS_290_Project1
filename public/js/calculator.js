@@ -1,6 +1,4 @@
 
-
-
       var resistanceValue;
       var toleranceValue;
 
@@ -17,7 +15,7 @@
 
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        xhttp.send("fname="+resistanceValue+"&lname="+toleranceValue);
+        xhttp.send("resistanceValue="+resistanceValue+"&toleranceValue="+toleranceValue+"&gb1="+globalBand1+"&gb2="+globalBand2+"&gb3="+globalBand3+"&gb4="+globalBand4);
         
       }
 
