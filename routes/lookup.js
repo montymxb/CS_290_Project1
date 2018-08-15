@@ -11,6 +11,7 @@ router.get('/', function(req, res) {
     b1:null,
     p1:null,
     m1:null,
+    title: "Lookup | Calculance"
     //u1:null
   });
 });
@@ -49,6 +50,7 @@ request(url,function(err,response,body){
           b1:null,
           p1:null,
           m1:null,
+          title: "Lookup | Calculance"
           //u1:null
         });
       }

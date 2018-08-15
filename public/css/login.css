@@ -1,0 +1,178 @@
+/**
+ * Styling for the login page
+ */
+
+ #login-div {
+ 	max-width: 375px;
+ 	display: block;
+ 	margin: 16px auto;
+ 	padding: 8px auto;
+ 	box-shadow: 0 0 5px #000;
+ 	background: #fff;
+ 	min-height: 500px;
+ 	border-radius: 8px;
+ }
+
+ #resistor-container {
+ 	overflow: hidden;
+ 	height: 250px;
+ }
+
+ #resistor-circle {
+ 	width: 200px;
+ 	height: 200px;
+ 	overflow: hidden;
+ 	margin: 20px auto 0 auto;
+ 	border: 2px solid #000;
+ 	border-radius: 125px;
+ 	transition: 0.3s;
+
+ 	animation: resistor-circle-animate forwards 1s ease;
+ }
+
+/*
+ #resistor-circle:hover {
+ 	border-width: 20px;
+ 	border-color: #fff;
+ 	margin-top: 0px;
+ }
+ */
+
+ #resistor-wrap {
+ 	margin: 75px 30px 0 30px;
+ }
+
+ #login-div #username {
+ 	text-align: center;
+ 	margin: 8px auto;
+ 	width: 260px;
+ 	font-size: 16px;
+ 	display: block;
+ 	border-style: none none solid none;
+ 	transition: 0.3s;
+ }
+
+ #login-div #username:hover {
+ 	color: #06c;
+ 	border-color: #06c;
+ }
+
+ #login-div #login-button {
+ 	text-align: center;
+ 	margin: 8px auto;
+ 	display: block;
+ 	width: 260px;
+ 	height: 35px;
+ 	border-radius: 8px;
+ 	border: 2px solid #000;
+ 	font-size: 20px;
+ 	background: #fff;
+ 	transition: 0.3s;
+ }
+
+ #login-div #login-button:hover {
+ 	color: #06c;
+ 	border-color: #06c;
+ 	cursor: pointer;
+ }
+
+
+ /** animated login resistor visual **/
+ .resistor-login-stub-left {
+	display: inline-block;
+	width: 15px;
+	height: 10px;
+	background: #06c;
+	margin-bottom: 15px;
+
+	animation: turn-white forwards 1s ease;
+}
+
+.resistor-login-stub-right {
+	display: inline-block;
+	width: 15px;
+	height: 10px;
+	background: #06c;
+	margin-bottom: 15px;
+
+	animation: turn-white forwards 1s ease;
+}
+
+@media(max-width: 600px) {
+	.resistor-login-stub-left {
+		display: none;
+	}
+	.resistor-login-stub-right {
+		display: none;
+	}
+}
+
+.resistor-login {
+	display: inline-block;
+	background: #fff;
+	min-width: 50px;
+	height: 40px;
+	border: 2px solid #06c;
+	border-radius: 8px;
+	overflow: hidden;
+
+	animation: turn-white forwards 1s ease;
+}
+
+.resistor-login .band {
+	display: inline-block;
+	width: 10px;
+	height: 100%;
+	background: #06c;
+	margin: 0 8px;
+}
+
+#band1 {
+
+}
+
+#band2 {
+
+}
+
+#band3 {
+
+}
+
+#band4 {
+
+}
+
+@keyframes resistor-circle-animate {
+	0% {
+		transform: rotate(0deg);
+		/*border-radius: 0;*/
+		border-color: #fff;
+		background: #fff;
+	}
+	100%  {
+		/*border-radius: 0;*/
+		border-color: #fff;
+		transform: rotate(390deg);
+		background: #06c;
+		/*border-width: 20px;*/
+		/*margin-top: 0;*/
+	}
+	/*
+	100% {
+		border-color: #000;
+		transform: rotate(360deg);
+		background: #fff;
+	}
+	*/
+}
+
+@keyframes turn-white {
+	0% {
+
+	}
+	100% {
+		background: #fff;
+		border-color: #fff;
+	}
+}

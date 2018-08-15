@@ -128,6 +128,7 @@ function getUserHistory(callback) {
 
 
 // creates a new user conditionally
+/*
 function createUser(data, callback) {
 	// password-less signup
 	if(!data.username) {
@@ -140,6 +141,7 @@ function createUser(data, callback) {
 
 	_preparedQuery("INSERT INTO users (createdAt,username,token) VALUES (NOW(),?,?)", [data.username, data.token], callback)
 }
+*/
 
 
 // logs in the current user, signing them up automatically if needed
@@ -154,10 +156,14 @@ function loginUser(data, callback) {
 	}
 
 	// check if this user exists
-	getConnection().query("SELECT user_id FROM users WHERE username=?", [data.username], function(error, results, fields) {
+	getConnection().query("SELECT id FROM users WHERE username=?", [data.username], function(error, results, fields) {
+		if(error) {
+			console.error(chalk.red("~ ")+"An error occurred checking if a user exists: "+error);
+			return
+		}
 		if(results.length > 0) {
 			// create a new session for this existing user
-			let user_id = results[0].user_id
+			let user_id = results[0].id
 			// clean up existing sessions, just in case
 			_preparedQuery("DELETE FROM sessions WHERE user_id=?", [user_id], {
 				success: function() {
@@ -174,8 +180,10 @@ function loginUser(data, callback) {
 			_preparedQuery("INSERT INTO users (createdAt,username,token) VALUES (NOW(),?,?)", [data.username, data.token], {
 				success:function(data) {
 					// get user_id for this newly created user now
-					_preparedQuery("SELECT user_id FROM users WHERE username=?", [data.username], {
+					_preparedQuery("SELECT id FROM users WHERE username=?", [data.username], {
 						success: function(data) {
+							console.dir(data)
+							let user_id = data.id
 							// clean up existing sessions, just in case
 							_preparedQuery("DELETE FROM sessions WHERE user_id=?", [user_id], {
 								success: function() {
@@ -234,5 +242,9 @@ function logoutUser(data, callback) {
 setupDB();
 
 module.exports = {
-	getUserHistory
+	addHistory,
+	getUserHistory,
+	loginUser,
+	getCurrentUser,
+	logoutUser
 }

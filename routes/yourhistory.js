@@ -17,12 +17,12 @@ historyRouter.get('/yourhistory', function(req, res) {
 		success: function(results) {
 			// show history
 			console.dir(results);
-			res.render("yourhistory.pug", {history: results})
+			res.render("yourhistory.pug", {history: results, title: "History | Calculance"})
 
 		},
 		failure: function(error) {
 			// failed, don't show any history
-			res.render("yourhistory.pug", {history: {}})
+			res.render("yourhistory.pug", {history: {}, title: "History | Calculance"})
 
 		}
 	})

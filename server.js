@@ -48,8 +48,11 @@ app.use(express.static('public'));
 
 
 // Routers
-app.use('/', homeRouter);
-app.use('/', yourHistoryRouter);
+app.use('/', homeRouter)
+app.use('/', yourHistoryRouter)
+app.use('/', loginRouter)
+app.use('/', calculateRouter)
+app.use('/lookup', lookup)
 
 
 // Shows serving a static file for a response to http://localhost:5000/
@@ -63,6 +66,7 @@ app.get('/', (request, response) => {
 
 // Shows serving a 'login' page (also a static file) when the user visits
 // http://localhost:5000/login
+/*
 app.get('/login', (request, response) => {
 	if(request.session.username) {
 		// redirect to authenticated page
@@ -75,15 +79,19 @@ app.get('/login', (request, response) => {
 
 	}
 });
+*/
 
 // Shows serving the 'template' page
 // http://localhost:5000/template
+/*
 app.get('/template', (request, response) => {
 	// USE PUG TEMPLATE FILE
 	response.render('template');
 });
+*/
 
 // handles a POST request to login, just forwards to 'authenticated'
+/*
 app.post('/login', (request, response) => {
 	console.log("user "+request.body.username + " logging in...");
 
@@ -96,11 +104,13 @@ app.post('/login', (request, response) => {
 	// redirect to the authenticated page
 	response.redirect('/authenticated');
 });
+*/
 
 // Shows serving an 'authenticated' page when the user visits
 // http://localhost:5000/authenticated
 // Responds with the given string below being used as html.
 // The \ characters allow the string to span that following line break, allowing it to be visually broken up
+/*
 app.get('/authenticated', (request, response) => {
 	console.log("processing authenticated request...");
 	let html = "";
@@ -139,8 +149,10 @@ app.get('/authenticated', (request, response) => {
 	// write out the response with one html or the other
 	response.send(html);
 });
+*/
 
 // Redirects to the login page
+/*
 app.get('/logout', (request, response) => {
 	console.log("logging out...");
 
@@ -149,6 +161,7 @@ app.get('/logout', (request, response) => {
 
 	response.redirect('/login');
 });
+*/
 
 // This tells the server to listen for the aforementioned requests on
 // the port we listed above. If it succeeds we should get the 'Server is listening...' message.
@@ -159,5 +172,3 @@ app.listen(port, (err) => {
   }
   console.log(`Server is listening on port ${port}`)
 })
-
-app.use('/lookup',lookup);
