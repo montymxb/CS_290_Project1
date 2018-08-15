@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+
+      .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropbtn:hover,
+      .dropbtn:focus {
+        background-color: #2980B9;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ddd
+      }
+
+      .show {
+        display: block;
+      }
+
+    </style>
+    <script type="text/javascript" src="calculator.js"></script>
+  </head>
+
+  <body>
+    <h1>Resistor Value Calculator</h1>
+    <div class="value display">
+      <h3>
+        Your current values are:
+      </h3>
+      <!--Display all values in a row-->
+    </div>
+
+    <div id="input">
+      <!-- All of these will have drop down menues implemented -->
+      <div id="b1">
+        <p>
+          Band 1
+        </p>
+        <p id="b1color">
+          black
+        </p>
+
+        <div class="dropdown">
+          <button onclick="myFunction1()" class="dropbtn">Select Band 1 Color</button>
+          <div id="myDropdown1" class="dropdown-content">
+            <input type="button" value="Black" id="status1" onclick="pressb1(1)">
+            <input type="button" value="Brown" id="status2" onclick="pressb1(2)">
+            <input type="button" value="Red" id="status3" onclick="pressb1(3)">
+            <input type="button" value="Orange" id="status1" onclick="pressb1(4)">
+            <input type="button" value="Yellow" id="status2" onclick="pressb1(5)">
+            <input type="button" value="Green" id="status3" onclick="pressb1(6)">
+            <input type="button" value="Blue" id="status1" onclick="pressb1(7)">
+            <input type="button" value="Violet" id="status2" onclick="pressb1(8)">
+            <input type="button" value="Gray" id="status3" onclick="pressb1(9)">
+            <input type="button" value="White" id="status3" onclick="pressb1(10)">
+          </div>
+        </div>
+      </div>
+      <div id="b2">
+        <p>
+          Band 2
+        </p>
+        <p id="b2color">
+          black
+        </p>
+
+        <div class="dropdown">
+          <button onclick="myFunction2()" class="dropbtn">Select Band 2 Color</button>
+          <div id="myDropdown2" class="dropdown-content">
+            <input type="button" value="Black" id="status1" onclick="pressb2(1)">
+            <input type="button" value="Brown" id="status2" onclick="pressb2(2)">
+            <input type="button" value="Red" id="status3" onclick="pressb2(3)">
+            <input type="button" value="Orange" id="status1" onclick="pressb2(4)">
+            <input type="button" value="Yellow" id="status2" onclick="pressb2(5)">
+            <input type="button" value="Green" id="status3" onclick="pressb2(6)">
+            <input type="button" value="Blue" id="status1" onclick="pressb2(7)">
+            <input type="button" value="Violet" id="status2" onclick="pressb2(8)">
+            <input type="button" value="Gray" id="status3" onclick="pressb2(9)">
+            <input type="button" value="White" id="status3" onclick="pressb2(10)">
+          </div>
+        </div>
+      </div>
+      <p>
+        Band 3
+      </p>
+      <p id="b3color">
+        black
+      </p>
+      <div class="dropdown">
+        <button onclick="myFunction3()" class="dropbtn">Select Band 3 Color</button>
+        <div id="myDropdown3" class="dropdown-content">
+          <input type="button" value="Black" id="status1" onclick="pressb3(1)">
+          <input type="button" value="Brown" id="status2" onclick="pressb3(2)">
+          <input type="button" value="Red" id="status3" onclick="pressb3(3)">
+          <input type="button" value="Orange" id="status1" onclick="pressb3(4)">
+          <input type="button" value="Yellow" id="status2" onclick="pressb3(5)">
+          <input type="button" value="Green" id="status3" onclick="pressb3(6)">
+          <input type="button" value="Blue" id="status1" onclick="pressb3(7)">
+          <input type="button" value="Violet" id="status2" onclick="pressb3(8)">
+          <input type="button" value="Gray" id="status3" onclick="pressb3(9)">
+          <input type="button" value="White" id="status3" onclick="pressb3(10)">
+          <input type="button" value="Gold" id="status3" onclick="pressb3(11)">
+          <input type="button" value="silver" id="status3" onclick="pressb3(12)">
+        </div>
+      </div>
+      <p>
+        Band 4
+      </p>
+      <p id="b4color">
+        brown
+      </p>
+      <div class="dropdown">
+        <button onclick="myFunction4()" class="dropbtn">Select Band 4 Color</button>
+        <div id="myDropdown4" class="dropdown-content">
+          <input type="button" value="Brown" id="status2" onclick="pressb4(2)">
+          <input type="button" value="Red" id="status3" onclick="pressb4(3)">
+          <input type="button" value="Green" id="status3" onclick="pressb4(6)">
+          <input type="button" value="Blue" id="status1" onclick="pressb4(7)">
+          <input type="button" value="Violet" id="status2" onclick="pressb4(8)">
+          <input type="button" value="Gray" id="status3" onclick="pressb4(9)">
+          <input type="button" value="Gold" id="status3" onclick="pressb4(11)">
+          <input type="button" value="silver" id="status3" onclick="pressb4(12)">
+        </div>
+      </div>
+    </div>
+    <div id="values">
+      <p>
+        Resistance Value:
+      </p>
+      <h3 id="resval">
+        Not calc
+      </h3>
+      <p>
+        Tolerance:
+      </p>
+      <h2 id="tolval">
+        Not calc
+      </h2>
+    </div>
+    <p id=testing>
+      testing
+    </p>
+  </body>
+
+</html>
