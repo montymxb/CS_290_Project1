@@ -16,6 +16,10 @@ function getConnection() {
 }
 
 function _query(query, callback) {
+    if(!callback) {
+        console.error("\n\nCannot call _query without providing a callback object!!\n\n");
+        return;
+    }
 
 	if(!callback.success || !callback.failure) {
 		console.error("\n\nCannot call _query without providing an object with a success & failure callback!!\n\n");
@@ -40,6 +44,11 @@ function _query(query, callback) {
 
 
 function _preparedQuery(query, data, callback) {
+	if(!callback) {
+		console.error("\n\nCannot call _query without providing a callback object!!\n\n");
+		return;
+	}
+
 	if(!callback.success || !callback.failure) {
 		console.error("\n\nCannot call _query without providing an object with a success & failure callback!!\n\n");
 		return;
@@ -64,7 +73,7 @@ function _preparedQuery(query, data, callback) {
 
 // Attempts to setup the DB if not done so already
 function setupDB() {
-	let userHistoryQuery = "CREATE TABLE IF NOT EXISTS user_history (id INT PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, createdAt DATETIME NOT NULL, resistance INT NOT NULL, tolerance INT NOT NULL, colors VARCHAR(100) NOT NULL)engine=InnoDB;";
+	let userHistoryQuery = "CREATE TABLE IF NOT EXISTS user_history (id INT PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, resistance INT NOT NULL, tolerance INT NOT NULL, colors VARCHAR(100) NOT NULL, descrip VARCHAR(200) NOT NULL)engine=InnoDB;";
 	let usersQuery ="CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, createdAt DATETIME NOT NULL, username VARCHAR(120), token VARCHAR(200) NOT NULL)engine=InnoDB;";
 	let sessionsQuery = "CREATE TABLE IF NOT EXISTS sessions (id INT PRIMARY KEY AUTO_INCREMENT, createdAt DATETIME NOT NULL, user_id INT NOT NULL, token VARCHAR(200) NOT NULL)engine=InnoDB;";
 
@@ -116,32 +125,28 @@ function addHistory(data, callback) {
 		throw "Missing 'colors' value!"
 	}
 
-	_preparedQuery("INSERT INTO user_history (user_id,createdAt,resistance,tolerance,colors) VALUES (?,NOW(),?,?,?)", data, callback)
-}
-
-
-// Gets recent user lookups, limited to 100 in ascending date order
-function getUserHistory(callback) {
-	// TODO get the current user's session id so we can make that work for us
-	_query("SELECT * FROM user_history ORDER BY createdAt DESC LIMIT 100", callback)
-}
-
-
-// creates a new user conditionally
-/*
-function createUser(data, callback) {
-	// password-less signup
-	if(!data.username) {
-		throw "Missing 'username' value in createUser data request!"
+	if(!data.descrip) {
+		throw "Missing 'descrip' value!"
 	}
 
-	if(!data.token) {
-		throw "Missing session 'token' (id) value to associate with this user!"
-	}
-
-	_preparedQuery("INSERT INTO users (createdAt,username,token) VALUES (NOW(),?,?)", [data.username, data.token], callback)
+	_preparedQuery("INSERT INTO user_history (user_id,resistance,tolerance,colors,descrip) VALUES (?,?,?,?,?)", [
+		data.user_id,
+		data.resistance,
+		data.tolerance,
+		data.colors,
+		data.descrip
+	], callback)
 }
-*/
+
+
+// Gets recent user lookups for the current user, limited to 100 in ascending date order
+function getUserHistory(data,callback) {
+	_preparedQuery(
+		"SELECT * FROM user_history WHERE user_id=? ORDER BY createdAt DESC LIMIT 100",
+		[data.user_id],
+		callback
+	)
+}
 
 
 // logs in the current user, signing them up automatically if needed

@@ -20,8 +20,8 @@ const loginRouter = require("./routes/login")
 const homeRouter = require("./routes/home")
 const calculateRouter = require("./routes/calculate")
 const yourHistoryRouter = require("./routes/yourhistory")
-const historyRouter = require("./routes/history")
 const lookup = require("./routes/lookup")
+const logoutRouter = require('./routes/logout')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,116 +52,8 @@ app.use('/', homeRouter)
 app.use('/', yourHistoryRouter)
 app.use('/', loginRouter)
 app.use('/', calculateRouter)
+app.use('/', logoutRouter)
 app.use('/lookup', lookup)
-
-
-// Shows serving a static file for a response to http://localhost:5000/
-/*
-app.get('/', (request, response) => {
-   // respond with the index.html page to start with...
-   console.log("index served...");
-   response.sendFile(path.join(__dirname + '/public/html/index.html'));
-})
-*/
-
-// Shows serving a 'login' page (also a static file) when the user visits
-// http://localhost:5000/login
-/*
-app.get('/login', (request, response) => {
-	if(request.session.username) {
-		// redirect to authenticated page
-		console.log("already authenticated user visited login, redirecting to authenticated...");
-		response.redirect('/authenticated');
-
-	} else {
-		console.log("login page served...");
-		response.sendFile(path.join(__dirname + '/public/html/login.html'));
-
-	}
-});
-*/
-
-// Shows serving the 'template' page
-// http://localhost:5000/template
-/*
-app.get('/template', (request, response) => {
-	// USE PUG TEMPLATE FILE
-	response.render('template');
-});
-*/
-
-// handles a POST request to login, just forwards to 'authenticated'
-/*
-app.post('/login', (request, response) => {
-	console.log("user "+request.body.username + " logging in...");
-
-	// get this user's session and set their username to it
-	let session = request.session;
-	session.username = request.body.username;
-
-	// password check here....
-
-	// redirect to the authenticated page
-	response.redirect('/authenticated');
-});
-*/
-
-// Shows serving an 'authenticated' page when the user visits
-// http://localhost:5000/authenticated
-// Responds with the given string below being used as html.
-// The \ characters allow the string to span that following line break, allowing it to be visually broken up
-/*
-app.get('/authenticated', (request, response) => {
-	console.log("processing authenticated request...");
-	let html = "";
-	if(!request.session.username) {
-		console.log("NOT authenticated...");
-		// not authenticated
-		html = "<!DOCTYPE html>\
-		<html>\
-		<head>\
-			<meta charset='utf-8'>\
-			<title>Not Authenticated!</title>\
-			<meta http-equiv='refresh' content='3;url=login'>\
-		</head>\
-		<body>\
-			<h1>You are not authenticated!</h1>\
-			<p>You will be redirected to the login page in 3 seconds</p>\
-		</body>\
-		</html>";
-
-	} else {
-		console.log("authenticated...");
-		// authenticated!
-		html = "<!DOCTYPE html>\
-		<html>\
-		<head>\
-			<meta charset='utf-8'>\
-			<title>Authenticated</title>\
-		</head>\
-		<body>\
-			<h1>Welcome " + request.session.username + "!</h1>\
-			<form action='logout' method='GET'><input type='submit' value='Logout!'></form>\
-		</body>\
-		</html>";
-	}
-
-	// write out the response with one html or the other
-	response.send(html);
-});
-*/
-
-// Redirects to the login page
-/*
-app.get('/logout', (request, response) => {
-	console.log("logging out...");
-
-	// unset the username for this session, logging them out...
-	request.session.username = null;
-
-	response.redirect('/login');
-});
-*/
 
 // This tells the server to listen for the aforementioned requests on
 // the port we listed above. If it succeeds we should get the 'Server is listening...' message.

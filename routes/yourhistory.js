@@ -13,16 +13,28 @@ const db = require('../models/db')
 
 historyRouter.get('/yourhistory', function(req, res) {
 
-	db.getUserHistory({
-		success: function(results) {
-			// show history
-			console.dir(results);
-			res.render("yourhistory.pug", {history: results, title: "History | Calculance"})
+	db.getCurrentUser({
+		token: req.sessionID
+	},{
+		success: function(userData) {
+            db.getUserHistory({
+            	user_id: userData[0].id
+			},{
+                success: function(results) {
+                    // show history
+                    res.render("yourhistory.pug", {history: results, title: "History | Calculance"})
 
+                },
+                failure: function(error) {
+                    // failed, don't show any history
+                    res.render("yourhistory.pug", {history: {}, title: "History | Calculance"})
+
+                }
+            })
 		},
-		failure: function(error) {
-			// failed, don't show any history
-			res.render("yourhistory.pug", {history: {}, title: "History | Calculance"})
+		failure: function() {
+			// redirect to home
+			res.redirect('/login')
 
 		}
 	})

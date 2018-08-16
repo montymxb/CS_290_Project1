@@ -1,18 +1,46 @@
 extends jon_layout
 
 block content
-    h1 Resistor Value Calculator
+    h1(style='text-align:center') Resistor Value Calculator
     .value.display
-      h3
+      h3(style='text-align:center')
         | Your current values are:
       // Display all values in a row
-    #input
+
+    #large-resistor-contain
+      #large-resistor-wrap
+        .resistor-large-stub-left
+        .resistor-large
+          span#cband1.band(style=`background:#000`)
+          span#cband2.band(style=`background:#000`)
+          span#cband3.band(style=`background:#000`)
+          span#cband4.band(style=`background:#7a5230`)
+        .resistor-large-stub-right
+
+    p(style='text-align:center;font-size:20px;font-weight:100') (
+      span#b1color black
+      | ,&nbsp;
+      span#b2color black
+      | ,&nbsp;
+      span#b3color black
+      | ,&nbsp;
+      span#b4color brown
+      | )
+
+    p(style='text-align:center;font-size:20px;font-weight:100') (resistance, tolerance)
+      br
+      span#resval(style='font-weight:bold')
+      |  Ω /
+      span#tolval(style='font-weight:bold')
+      |  %
+
+    .select-option-container
       // All of these will have drop down menues implemented
-      #b1
-        p
-          | Band 1
-        p#b1color
-          | black
+      .select-option
+        //p
+        //  | Band 1
+        //p#b1color
+        //  | black
         .dropdown
           button.dropbtn(onclick='myFunction1()') Select Band 1 Color
           #myDropdown1.dropdown-content
@@ -26,11 +54,11 @@ block content
             input#status2(type='button', value='Violet', onclick='pressb1(8)')
             input#status3(type='button', value='Gray', onclick='pressb1(9)')
             input#status3(type='button', value='White', onclick='pressb1(10)')
-      #b2
-        p
-          | Band 2
-        p#b2color
-          | black
+      .select-option
+        //p
+        //  | Band 2
+        //p#b2color
+        //  | black
         .dropdown
           button.dropbtn(onclick='myFunction2()') Select Band 2 Color
           #myDropdown2.dropdown-content
@@ -44,46 +72,48 @@ block content
             input#status2(type='button', value='Violet', onclick='pressb2(8)')
             input#status3(type='button', value='Gray', onclick='pressb2(9)')
             input#status3(type='button', value='White', onclick='pressb2(10)')
-      p
-        | Band 3
-      p#b3color
-        | black
-      .dropdown
-        button.dropbtn(onclick='myFunction3()') Select Band 3 Color
-        #myDropdown3.dropdown-content
-          input#status1(type='button', value='Black', onclick='pressb3(1)')
-          input#status2(type='button', value='Brown', onclick='pressb3(2)')
-          input#status3(type='button', value='Red', onclick='pressb3(3)')
-          input#status1(type='button', value='Orange', onclick='pressb3(4)')
-          input#status2(type='button', value='Yellow', onclick='pressb3(5)')
-          input#status3(type='button', value='Green', onclick='pressb3(6)')
-          input#status1(type='button', value='Blue', onclick='pressb3(7)')
-          input#status2(type='button', value='Violet', onclick='pressb3(8)')
-          input#status3(type='button', value='Gray', onclick='pressb3(9)')
-          input#status3(type='button', value='White', onclick='pressb3(10)')
-          input#status3(type='button', value='Gold', onclick='pressb3(11)')
-          input#status3(type='button', value='silver', onclick='pressb3(12)')
-      p
-        | Band 4
-      p#b4color
-        | brown
-      .dropdown
-        button.dropbtn(onclick='myFunction4()') Select Band 4 Color
-        #myDropdown4.dropdown-content
-          input#status2(type='button', value='Brown', onclick='pressb4(2)')
-          input#status3(type='button', value='Red', onclick='pressb4(3)')
-          input#status3(type='button', value='Green', onclick='pressb4(6)')
-          input#status1(type='button', value='Blue', onclick='pressb4(7)')
-          input#status2(type='button', value='Violet', onclick='pressb4(8)')
-          input#status3(type='button', value='Gray', onclick='pressb4(9)')
-          input#status3(type='button', value='Gold', onclick='pressb4(11)')
-          input#status3(type='button', value='silver', onclick='pressb4(12)')
-    #values
-      p
-        | Resistance Value:
-      h3#resval
-        | Not calc
-      p
-        | Tolerance:
-      h2#tolval
-        | Not calc
+      //p
+      //  | Band 3
+      //p#b3color
+      //  | black
+      .select-option
+        .dropdown
+          button.dropbtn(onclick='myFunction3()') Select Band 3 Color
+          #myDropdown3.dropdown-content
+            input#status1(type='button', value='Black', onclick='pressb3(1)')
+            input#status2(type='button', value='Brown', onclick='pressb3(2)')
+            input#status3(type='button', value='Red', onclick='pressb3(3)')
+            input#status1(type='button', value='Orange', onclick='pressb3(4)')
+            input#status2(type='button', value='Yellow', onclick='pressb3(5)')
+            input#status3(type='button', value='Green', onclick='pressb3(6)')
+            input#status1(type='button', value='Blue', onclick='pressb3(7)')
+            input#status2(type='button', value='Violet', onclick='pressb3(8)')
+            input#status3(type='button', value='Gray', onclick='pressb3(9)')
+            input#status3(type='button', value='White', onclick='pressb3(10)')
+            input#status3(type='button', value='Gold', onclick='pressb3(11)')
+            input#status3(type='button', value='silver', onclick='pressb3(12)')
+      //p
+      //  | Band 4
+      //p#b4color
+      //  | brown
+      .select-option
+        .dropdown
+          button.dropbtn(onclick='myFunction4()') Select Band 4 Color
+          #myDropdown4.dropdown-content
+            input#status2(type='button', value='Brown', onclick='pressb4(2)')
+            input#status3(type='button', value='Red', onclick='pressb4(3)')
+            input#status3(type='button', value='Green', onclick='pressb4(6)')
+            input#status1(type='button', value='Blue', onclick='pressb4(7)')
+            input#status2(type='button', value='Violet', onclick='pressb4(8)')
+            input#status3(type='button', value='Gray', onclick='pressb4(9)')
+            input#status3(type='button', value='Gold', onclick='pressb4(11)')
+            input#status3(type='button', value='silver', onclick='pressb4(12)')
+    //#values
+      //p
+      //  | Resistance Value:
+      //h3#resval
+      //  | Not calc
+      //p
+      //  | Tolerance:
+      //h2#tolval
+      //  | Not calc

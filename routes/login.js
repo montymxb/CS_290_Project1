@@ -11,9 +11,6 @@ const db = require('../models/db')
 
 // handle GET to login
 loginRouter.get('/login', function(req, res) {
-
-	console.info("\n\nCurrent SessionID: "+req.sessionID+"\n\n");
-
 	db.getCurrentUser({
 		token: req.sessionID
 	}, {

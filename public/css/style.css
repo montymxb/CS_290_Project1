@@ -224,3 +224,73 @@ body {
 	background: #000;
 	margin: 0 8px;
 }
+
+
+/** LARGE Resistor Visual **/
+#large-resistor-contain {
+	display: block;
+	margin: 8px auto;
+}
+
+#large-resistor-wrap {
+	display: block;
+	margin: 8px auto;
+	width: 178px;
+}
+
+.resistor-large-stub-left {
+	display: inline-block;
+	width: 15px;
+	height: 20px;
+	background: #c0c0c0;
+	margin-bottom: 15px;
+}
+
+.resistor-large-stub-right {
+	display: inline-block;
+	width: 15px;
+	height: 20px;
+	background: #c0c0c0;
+	margin-bottom: 15px;
+}
+
+@media(max-width: 600px) {
+	.resistor-large-stub-left {
+		display: none;
+	}
+	.resistor-large-stub-right {
+		display: none;
+	}
+}
+
+.resistor-large {
+	display: inline-block;
+	background: #fff;
+	min-width: 100px;
+	height: 50px;
+	border: 2px solid #c0c0c0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.resistor-large .band {
+	display: inline-block;
+	width: 20px;
+	height: 100%;
+	background: #000;
+	margin: 0 8px;
+	transition: 0.3s;
+}
+
+/* For styling the calculator.pug template */
+.select-option-container {
+
+}
+
+.select-option {
+	display: block;
+	height: 50px;
+	margin: 8px auto;
+	padding: 8px;
+	text-align:center;
+}

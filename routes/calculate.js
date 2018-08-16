@@ -43,11 +43,21 @@ function convertToHex(color) {
 			return "#00f"
 		case "violet":
 			return "#885ead"
+
+		// both the same
 		case "grey":
-			return "#ccc"
+			return "#808080"
+        case "gray":
+            return "#808080"
+
 		case "white":
 			return "#eee"
+		case "gold":
+			return "#ffd700"
+		case "silver":
+			return "#c0c0c0"
 		default:
+			console.info("Unknown color '"+color+"', defaulting to #fff")
 			return "#fff"
 	}
 }
@@ -89,12 +99,26 @@ historyRouter.post('/calculate', function(req, res) {
                 throw "Missing global band 4 in calc request!"
             }
 
+			let colors = convertToHex(req.body.gb1) + "," + convertToHex(req.body.gb2) + "," + convertToHex(req.body.gb3) + "," + convertToHex(req.body.gb4);
+
+			let descrip = req.body.gb1+","+req.body.gb2+","+req.body.gb3+","+req.body.gb4
+
 			// add this historical lookup entry
 			db.addHistory({
 				user_id: data[0].id,
 				resistance: req.body.resistanceValue,
 				tolerance: req.body.toleranceValue,
-				colors: convertToHex(req.body.globalBand1) + "," + convertToHex(req.body.globalBand2) + "," + convertToHex(req.body.globalBand3) + "," + convertToHex(req.body.globalBand4)
+				colors: colors,
+                descrip: descrip
+			}, {
+				success: function() {
+					// note that history was added
+					console.info("* lookup recorded");
+					res.send("calculation recorded for "+colors);
+				},
+				failure: function() {
+					console.error("Unable to record lookup!");
+				}
 			})
 
 		},
