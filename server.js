@@ -31,7 +31,7 @@ app.set('view engine', 'pug');
 // You usually don't see this, but entering http://localhost and http://localhost:80 are synonymous.
 // Using port 5000 is arbitrary, any unused port will do, and you can change it to something else to see that it does this.
 // You will have to restart the server for any changes to take effect however.
-const port = 5000
+const port = 5058
 
 
 // configure express to use body-parser as the middleware (decoder) for handling POST data
