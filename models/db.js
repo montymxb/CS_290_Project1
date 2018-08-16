@@ -4,10 +4,8 @@
 const mysql = require('mysql2')
 const chalk = require('chalk');
 
-// TODO SWAP OUT
-//const credentials = require('./../config/credentials.json')
-console.warn("\n\n\n!!!PERSONAL CREDENTIALS STILL EMBEDDED!!!\n\n\n")
-const credentials = require('./../config/other_credentials.json')
+
+const credentials = require('./../config/credentials.json')
 
 
 // retrieves an active connection to the DB
