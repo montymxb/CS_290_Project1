@@ -62,6 +62,27 @@ function convertToHex(color) {
 	}
 }
 
+function sanitizeColorString(color) {
+	switch(color) {
+		case "black":
+		case "brown":
+		case "red":
+		case "orange":
+		case "yellow":
+		case "green":
+		case "blue":
+		case "violet":
+		case "grey":
+		case "gray":
+		case "white":
+		case "gold":
+		case "silver":
+			return color;
+		default:
+			return "white"
+	}
+}
+
 historyRouter.post('/calculate', function(req, res) {
 	//resistanceValue
 	//toleranceValue
@@ -99,9 +120,14 @@ historyRouter.post('/calculate', function(req, res) {
                 throw "Missing global band 4 in calc request!"
             }
 
-			let colors = convertToHex(req.body.gb1) + "," + convertToHex(req.body.gb2) + "," + convertToHex(req.body.gb3) + "," + convertToHex(req.body.gb4);
+            var c1 = sanitizeColorString(req.body.gb1);
+            var c2 = sanitizeColorString(req.body.gb2);
+            var c3 = sanitizeColorString(req.body.gb3);
+            var c4 = sanitizeColorString(req.body.gb4);
 
-			let descrip = req.body.gb1+","+req.body.gb2+","+req.body.gb3+","+req.body.gb4
+			let colors = convertToHex(c1) + "," + convertToHex(c2) + "," + convertToHex(c3) + "," + convertToHex(c4);
+
+			let descrip = c1+","+c2+","+c3+","+c4;
 
 			// add this historical lookup entry
 			db.addHistory({
