@@ -1,0 +1,21 @@
+extends layout_minus_nav
+
+block content
+	#login-div
+		form(method="POST")
+			br
+			#resistor-container
+				#resistor-circle
+					#resistor-wrap
+						.resistor-login-stub-left
+						.resistor-login
+							.band#band1
+							.band#band2
+							.band#band3
+							.band#band4
+						.resistor-login-stub-right
+			br
+			h1(style='text-align:center') Resistor Calculator
+			input#username(type="text",name="username",placeholder="username")
+			br
+			input#login-button(type="submit",value="Login")

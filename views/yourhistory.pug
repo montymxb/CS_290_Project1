@@ -8,12 +8,13 @@ block content
 			span#nothing-found-descrip <a href="calculate">Calculate a resistance value first</a> to get information here.
 	each val in history
 		div.history-cell
+			p(style='font-size:18px;text-align:center;font-weight:100') (#{val.descrip})
 			p.hist-created #{val.createdAt}
 			.resistor-small-stub-left
-			.resistor-small
+			.resistor-small(title=`${val.descrip}`)
 				each color in val.colors.split(',')
 					span.band(style=`background:${color}`)
 			.resistor-small-stub-right
-			p.hist-resistance #{val.resistance} ohms
-			p.hist-tolerance #{val.tolerance} tolerance
+			p.hist-resistance #{val.resistance} Ω (resistance)
+			p.hist-tolerance #{val.tolerance} % (tolerance)
 			br

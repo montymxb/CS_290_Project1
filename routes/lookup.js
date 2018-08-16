@@ -2,17 +2,34 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
+const db = require('../models/db')
+
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('lookup',{brand:null,
-    price:null,
-    mpn:null,
-    url:null,
-    b1:null,
-    p1:null,
-    m1:null,
-    //u1:null
-  });
+
+  db.getCurrentUser({
+    token: req.sessionID
+  },{
+      success: function(results) {
+          // success
+          res.render('lookup',{brand:null,
+              price:null,
+              mpn:null,
+              url:null,
+              b1:null,
+              p1:null,
+              m1:null,
+              title: "Lookup | Calculance"
+              //u1:null
+          });
+
+      },
+      failure: function(error) {
+          // failed, go back to login
+          res.redirect('/login')
+
+      }
+  })
 });
 
 router.get('/formGet', function(req, res) {
@@ -49,6 +66,7 @@ request(url,function(err,response,body){
           b1:null,
           p1:null,
           m1:null,
+          title: "Lookup | Calculance"
           //u1:null
         });
       }

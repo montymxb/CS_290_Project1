@@ -1,301 +1,368 @@
 
 
 
-      var resistanceValue;
-      var toleranceValue;
+var resistanceValue;
+var toleranceValue;
+var globalBand1;
+var globalBand2;
+var globalBand3;
+var globalBand4;
 
-      function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-/*        xhttp.onreadystatechange = function() {
 
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerHTML = this.responseText;
-          }
-        };
-*/
-        xhttp.open("POST", "calculate", true);
+// convert a given color to hex
+function convertToHex(color) {
+    switch(color) {
+        case "black":
+            return "#000"
+        case "brown":
+            return "#7a5230"
+        case "red":
+            return "#f00"
+        case "orange":
+            return "#ffa500"
+        case "yellow":
+            return "#ffff4d"
+        case "green":
+            return "#0f0"
+        case "blue":
+            return "#00f"
+        case "violet":
+            return "#885ead"
+        case "grey":
+            return "#808080"
+        case "gray":
+            return "#808080"
+        case "white":
+            return "#eee"
+        case "gold":
+            return "#ffd700"
+        case "silver":
+            return "#c0c0c0"
+        default:
+            console.info("Unknown color '"+color+"', defaulting to #fff")
+            return "#fff"
+    }
+}
 
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+// Updates the colors of the visual resistor
+function updateVisualResistor() {
+    var c1 = document.getElementById("b1color").innerHTML;
+    var c2 = document.getElementById("b2color").innerHTML;
+    var c3 = document.getElementById("b3color").innerHTML;
+    var c4 = document.getElementById("b4color").innerHTML;
 
-        xhttp.send("fname="+resistanceValue+"&lname="+toleranceValue);
-        
-      }
+    c1 = convertToHex(c1);
+    c2 = convertToHex(c2);
+    c3 = convertToHex(c3);
+    c4 = convertToHex(c4);
 
-      function mantissa(band1, band2) {
-        function getVal(color) {
-          if (color === "black") {
+    document.getElementById("cband1").style.background = c1;
+    document.getElementById("cband2").style.background = c2;
+    document.getElementById("cband3").style.background = c3;
+    document.getElementById("cband4").style.background = c4;
+}
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        //document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "calculate", true);
+
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  xhttp.send("resistanceValue="+resistanceValue+"&toleranceValue="+toleranceValue+"&gb1="+globalBand1+"&gb2="+globalBand2+"&gb3="+globalBand3+"&gb4="+globalBand4);
+
+}
+
+function mantissa(band1, band2) {
+    function getVal(color) {
+        if (color === "black") {
             return 0;
-          } else if (color === "brown") {
+        } else if (color === "brown") {
             return 1;
-          } else if (color === "red") {
+        } else if (color === "red") {
             return 2;
-          } else if (color === "orange") {
+        } else if (color === "orange") {
             return 3;
-          } else if (color === "yellow") {
+        } else if (color === "yellow") {
             return 4;
-          } else if (color === "green") {
+        } else if (color === "green") {
             return 5;
-          } else if (color === "blue") {
+        } else if (color === "blue") {
             return 6;
-          } else if (color === "violet") {
+        } else if (color === "violet") {
             return 7;
-          } else if (color === "grey") {
+        } else if (color === "grey") {
             return 8;
-          } else if (color === "white") {
+        } else if (color === "white") {
             return 9;
-          } else {
+        } else {
             return 0;
-          }
         }
-        let p1 = getVal(band1);
-        let p2 = getVal(band2);
-        return (10 * p1) + p2;
-      }
+    }
+    let p1 = getVal(band1);
+    let p2 = getVal(band2);
+    return (10 * p1) + p2;
+}
 
-      function multiplier(band3) {
-        function getMult(color) {
-          if (color === "black") {
+function multiplier(band3) {
+    function getMult(color) {
+        if (color === "black") {
             return 1;
-          } else if (color === "brown") {
+        } else if (color === "brown") {
             return 10;
-          } else if (color === "red") {
+        } else if (color === "red") {
             return 100;
-          } else if (color === "orange") {
+        } else if (color === "orange") {
             return 1000;
-          } else if (color === "yellow") {
+        } else if (color === "yellow") {
             return 10000;
-          } else if (color === "green") {
+        } else if (color === "green") {
             return 100000;
-          } else if (color === "blue") {
+        } else if (color === "blue") {
             return 1000000;
-          } else if (color === "violet") {
+        } else if (color === "violet") {
             return 10000000;
-          } else if (color === "grey") {
+        } else if (color === "grey") {
             return 100000000;
-          } else if (color === "white") {
+        } else if (color === "white") {
             return 1000000000;
-          } else if (color === "gold") {
+        } else if (color === "gold") {
             return .1;
-          } else if (color === "silver") {
+        } else if (color === "silver") {
             return .01;
-          } else {
+        } else {
             return 0;
-          }
         }
-        return getMult(band3);
-      }
+    }
+    return getMult(band3);
+}
 
-      function resistance(b1, b2, b3) {
-        let resistorValue = mantissa(b1, b2) * multiplier(b3);
-        return resistorValue;
-      }
+function resistance(b1, b2, b3) {
+    let resistorValue = mantissa(b1, b2) * multiplier(b3);
+    return resistorValue;
+}
 
-      function tolerance(band4, rv) {
-        function getTol(color) {
-          if (color === "brown") {
+function tolerance(band4, rv) {
+    function getTol(color) {
+        if (color === "brown") {
             return .01;
-          } else if (color === "red") {
+        } else if (color === "red") {
             return .02;
-          } else if (color === "green") {
+        } else if (color === "green") {
             return .005;
-          } else if (color === "blue") {
+        } else if (color === "blue") {
             return .0025;
-          } else if (color === "violet") {
+        } else if (color === "violet") {
             return .001;
-          } else if (color === "grey") {
+        } else if (color === "grey") {
             return .0005;
-          } else if (color === "gold") {
+        } else if (color === "gold") {
             return .05;
-          } else if (color === "silver") {
+        } else if (color === "silver") {
             return .1;
-          } else {
+        } else {
             return 0;
-          }
         }
-        return rv * getTol(band4);
-      }
+    }
+    return rv * getTol(band4);
+}
 
 
-      function myFunction1() {
-        document.getElementById("myDropdown1").classList.toggle("show");
-      }
+function myFunction1() {
+    document.getElementById("myDropdown1").classList.toggle("show");
+}
 
-      function myFunction2() {
-        document.getElementById("myDropdown2").classList.toggle("show");
-      }
+function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
 
-      function myFunction3() {
-        document.getElementById("myDropdown3").classList.toggle("show");
-      }
+function myFunction3() {
+    document.getElementById("myDropdown3").classList.toggle("show");
+}
 
-      function myFunction4() {
-        document.getElementById("myDropdown4").classList.toggle("show");
-      }
+function myFunction4() {
+    document.getElementById("myDropdown4").classList.toggle("show");
+}
 
 
-      window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
 
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
+                openDropdown.classList.remove('show');
             }
-          }
         }
-      }
+    }
+}
 
-      function calculate(ba1, ba2, ba3, ba4) {
-        var omega = resistance(ba1, ba2, ba3);
-        var delta = tolerance(ba4, omega);
-        resistanceValue = omega;
-        toleranceValue = delta;
-        document.getElementById("resval").innerHTML = omega;
-        document.getElementById("tolval").innerHTML = delta;
-      }
+function calculate(ba1, ba2, ba3, ba4) {
+    var omega = resistance(ba1, ba2, ba3);
+    var delta = tolerance(ba4, omega);
+    resistanceValue = omega;
+    toleranceValue = delta;
+    globalBand1 = document.getElementById("b1color").innerHTML;
+    globalBand2 = document.getElementById("b2color").innerHTML;
+    globalBand3 = document.getElementById("b3color").innerHTML;
+    globalBand4 = document.getElementById("b4color").innerHTML;
+    document.getElementById("resval").innerHTML = omega;
+    document.getElementById("tolval").innerHTML = delta;
 
+    // store request server-side
+    loadDoc();
 
-
-      function pressb1(n) {
-        if (n == 1) {
-          document.getElementById("b1color").innerHTML = "black";
-        } else if (n == 2) {
-          document.getElementById("b1color").innerHTML = "brown";
-        } else if (n == 3) {
-          document.getElementById("b1color").innerHTML = "red";
-        } else if (n == 4) {
-          document.getElementById("b1color").innerHTML = "orange";
-        } else if (n == 5) {
-          document.getElementById("b1color").innerHTML = "yellow";
-        } else if (n == 6) {
-          document.getElementById("b1color").innerHTML = "green";
-        } else if (n == 7) {
-          document.getElementById("b1color").innerHTML = "blue";
-        } else if (n == 8) {
-          document.getElementById("b1color").innerHTML = "violet";
-        } else if (n == 9) {
-          document.getElementById("b1color").innerHTML = "gray";
-        } else if (n == 10) {
-          document.getElementById("b1color").innerHTML = "white";
-        }
+    // update the visual
+    updateVisualResistor();
+}
 
 
-        var c1 = document.getElementById("b1color").innerHTML;
-        var c2 = document.getElementById("b2color").innerHTML;
-        var c3 = document.getElementById("b3color").innerHTML;
-        var c4 = document.getElementById("b4color").innerHTML;
-        document.getElementById("testing").innerHTML = c1;
-        calculate(c1, c2, c3, c4);
-      }
 
-      function pressb2(n) {
-        //sets current color
-        if (n == 1) {
-          document.getElementById("b2color").innerHTML = "black";
-        } else if (n == 2) {
-          document.getElementById("b2color").innerHTML = "brown";
-        } else if (n == 3) {
-          document.getElementById("b2color").innerHTML = "red";
-        } else if (n == 4) {
-          document.getElementById("b2color").innerHTML = "orange";
-        } else if (n == 5) {
-          document.getElementById("b2color").innerHTML = "yellow";
-        } else if (n == 6) {
-          document.getElementById("b2color").innerHTML = "green";
-        } else if (n == 7) {
-          document.getElementById("b2color").innerHTML = "blue";
-        } else if (n == 8) {
-          document.getElementById("b2color").innerHTML = "violet";
-        } else if (n == 9) {
-          document.getElementById("b2color").innerHTML = "gray";
-        } else if (n == 10) {
-          document.getElementById("b2color").innerHTML = "white";
-        }
+function pressb1(n) {
+    if (n == 1) {
+        document.getElementById("b1color").innerHTML = "black";
+    } else if (n == 2) {
+        document.getElementById("b1color").innerHTML = "brown";
+    } else if (n == 3) {
+        document.getElementById("b1color").innerHTML = "red";
+    } else if (n == 4) {
+        document.getElementById("b1color").innerHTML = "orange";
+    } else if (n == 5) {
+        document.getElementById("b1color").innerHTML = "yellow";
+    } else if (n == 6) {
+        document.getElementById("b1color").innerHTML = "green";
+    } else if (n == 7) {
+        document.getElementById("b1color").innerHTML = "blue";
+    } else if (n == 8) {
+        document.getElementById("b1color").innerHTML = "violet";
+    } else if (n == 9) {
+        document.getElementById("b1color").innerHTML = "gray";
+    } else if (n == 10) {
+        document.getElementById("b1color").innerHTML = "white";
+    }
 
-        //currently these are not passing vlaid inputs
-        //not yet sure why
-        var c1 = document.getElementById("b1color").innerHTML;
-        var c2 = document.getElementById("b2color").innerHTML;
-        var c3 = document.getElementById("b3color").innerHTML;
-        var c4 = document.getElementById("b4color").innerHTML;
-        //figuringout what is getting passed
-        document.getElementById("testing").innerHTML = c1;
-        calculate(c1, c2, c3, c4);
-      }
 
-      function pressb3(n) {
-        //sets current color
-        if (n == 1) {
-          document.getElementById("b3color").innerHTML = "black";
-        } else if (n == 2) {
-          document.getElementById("b3color").innerHTML = "brown";
-        } else if (n == 3) {
-          document.getElementById("b3color").innerHTML = "red";
-        } else if (n == 4) {
-          document.getElementById("b3color").innerHTML = "orange";
-        } else if (n == 5) {
-          document.getElementById("b3color").innerHTML = "yellow";
-        } else if (n == 6) {
-          document.getElementById("b3color").innerHTML = "green";
-        } else if (n == 7) {
-          document.getElementById("b3color").innerHTML = "blue";
-        } else if (n == 8) {
-          document.getElementById("b3color").innerHTML = "violet";
-        } else if (n == 9) {
-          document.getElementById("b3color").innerHTML = "gray";
-        } else if (n == 10) {
-          document.getElementById("b3color").innerHTML = "white";
-        } else if (n == 11) {
-          document.getElementById("b3color").innerHTML = "gold";
-        } else if (n == 12) {
-          document.getElementById("b3color").innerHTML = "silver";
-        }
+    var c1 = document.getElementById("b1color").innerHTML;
+    var c2 = document.getElementById("b2color").innerHTML;
+    var c3 = document.getElementById("b3color").innerHTML;
+    var c4 = document.getElementById("b4color").innerHTML;
+    //document.getElementById("testing").innerHTML = c1;
+    calculate(c1, c2, c3, c4);
+}
 
-        var c1 = document.getElementById("b1color").innerHTML;
-        var c2 = document.getElementById("b2color").innerHTML;
-        var c3 = document.getElementById("b3color").innerHTML;
-        var c4 = document.getElementById("b4color").innerHTML;
-        document.getElementById("testing").innerHTML = c1;
-        calculate(c1, c2, c3, c4);
-      }
+function pressb2(n) {
+    //sets current color
+    if (n == 1) {
+        document.getElementById("b2color").innerHTML = "black";
+    } else if (n == 2) {
+        document.getElementById("b2color").innerHTML = "brown";
+    } else if (n == 3) {
+        document.getElementById("b2color").innerHTML = "red";
+    } else if (n == 4) {
+        document.getElementById("b2color").innerHTML = "orange";
+    } else if (n == 5) {
+        document.getElementById("b2color").innerHTML = "yellow";
+    } else if (n == 6) {
+        document.getElementById("b2color").innerHTML = "green";
+    } else if (n == 7) {
+        document.getElementById("b2color").innerHTML = "blue";
+    } else if (n == 8) {
+        document.getElementById("b2color").innerHTML = "violet";
+    } else if (n == 9) {
+        document.getElementById("b2color").innerHTML = "gray";
+    } else if (n == 10) {
+        document.getElementById("b2color").innerHTML = "white";
+    }
 
-      function pressb4(n) {
-        //sets current color
-        if (n == 1) {
-          document.getElementById("b4color").innerHTML = "black";
-        } else if (n == 2) {
-          document.getElementById("b4color").innerHTML = "brown";
-        } else if (n == 3) {
-          document.getElementById("b4color").innerHTML = "red";
-        } else if (n == 4) {
-          document.getElementById("b4color").innerHTML = "orange";
-        } else if (n == 5) {
-          document.getElementById("b4color").innerHTML = "yellow";
-        } else if (n == 6) {
-          document.getElementById("b4color").innerHTML = "green";
-        } else if (n == 7) {
-          document.getElementById("b4color").innerHTML = "blue";
-        } else if (n == 8) {
-          document.getElementById("b4color").innerHTML = "violet";
-        } else if (n == 9) {
-          document.getElementById("b4color").innerHTML = "gray";
-        } else if (n == 10) {
-          document.getElementById("b4color").innerHTML = "white";
-        } else if (n == 11) {
-          document.getElementById("b4color").innerHTML = "gold";
-        } else if (n == 12) {
-          document.getElementById("b4color").innerHTML = "silver";
-        }
+    //currently these are not passing vlaid inputs
+    //not yet sure why
+    var c1 = document.getElementById("b1color").innerHTML;
+    var c2 = document.getElementById("b2color").innerHTML;
+    var c3 = document.getElementById("b3color").innerHTML;
+    var c4 = document.getElementById("b4color").innerHTML;
+    //figuringout what is getting passed
+    //document.getElementById("testing").innerHTML = c1;
+    calculate(c1, c2, c3, c4);
+}
 
-        //currently these are not passing vlaid inputs
-        //not yet sure why
-        var c1 = document.getElementById("b1color").innerHTML;
-        var c2 = document.getElementById("b2color").innerHTML;
-        var c3 = document.getElementById("b3color").innerHTML;
-        var c4 = document.getElementById("b4color").innerHTML;
-        //figuringout what is getting passed
-        document.getElementById("testing").innerHTML = c1;
-        calculate(c1, c2, c3, c4);
-      }
+function pressb3(n) {
+    //sets current color
+    if (n == 1) {
+        document.getElementById("b3color").innerHTML = "black";
+    } else if (n == 2) {
+        document.getElementById("b3color").innerHTML = "brown";
+    } else if (n == 3) {
+        document.getElementById("b3color").innerHTML = "red";
+    } else if (n == 4) {
+        document.getElementById("b3color").innerHTML = "orange";
+    } else if (n == 5) {
+        document.getElementById("b3color").innerHTML = "yellow";
+    } else if (n == 6) {
+        document.getElementById("b3color").innerHTML = "green";
+    } else if (n == 7) {
+        document.getElementById("b3color").innerHTML = "blue";
+    } else if (n == 8) {
+        document.getElementById("b3color").innerHTML = "violet";
+    } else if (n == 9) {
+        document.getElementById("b3color").innerHTML = "gray";
+    } else if (n == 10) {
+        document.getElementById("b3color").innerHTML = "white";
+    } else if (n == 11) {
+        document.getElementById("b3color").innerHTML = "gold";
+    } else if (n == 12) {
+        document.getElementById("b3color").innerHTML = "silver";
+    }
+
+    var c1 = document.getElementById("b1color").innerHTML;
+    var c2 = document.getElementById("b2color").innerHTML;
+    var c3 = document.getElementById("b3color").innerHTML;
+    var c4 = document.getElementById("b4color").innerHTML;
+    //document.getElementById("testing").innerHTML = c1;
+    calculate(c1, c2, c3, c4);
+}
+
+function pressb4(n) {
+    //sets current color
+    if (n == 1) {
+        document.getElementById("b4color").innerHTML = "black";
+    } else if (n == 2) {
+        document.getElementById("b4color").innerHTML = "brown";
+    } else if (n == 3) {
+        document.getElementById("b4color").innerHTML = "red";
+    } else if (n == 4) {
+        document.getElementById("b4color").innerHTML = "orange";
+    } else if (n == 5) {
+        document.getElementById("b4color").innerHTML = "yellow";
+    } else if (n == 6) {
+        document.getElementById("b4color").innerHTML = "green";
+    } else if (n == 7) {
+        document.getElementById("b4color").innerHTML = "blue";
+    } else if (n == 8) {
+        document.getElementById("b4color").innerHTML = "violet";
+    } else if (n == 9) {
+        document.getElementById("b4color").innerHTML = "gray";
+    } else if (n == 10) {
+        document.getElementById("b4color").innerHTML = "white";
+    } else if (n == 11) {
+        document.getElementById("b4color").innerHTML = "gold";
+    } else if (n == 12) {
+        document.getElementById("b4color").innerHTML = "silver";
+    }
+
+    //currently these are not passing vlaid inputs
+    //not yet sure why
+    var c1 = document.getElementById("b1color").innerHTML;
+    var c2 = document.getElementById("b2color").innerHTML;
+    var c3 = document.getElementById("b3color").innerHTML;
+    var c4 = document.getElementById("b4color").innerHTML;
+    //figuringout what is getting passed
+    //document.getElementById("testing").innerHTML = c1;
+    calculate(c1, c2, c3, c4);
+}
