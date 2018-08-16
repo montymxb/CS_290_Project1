@@ -57,7 +57,7 @@
  	border-color: #06c;
  }
 
- #login-div #login-button {
+ #login-button {
  	text-align: center;
  	margin: 8px auto;
  	display: block;
@@ -68,9 +68,11 @@
  	font-size: 20px;
  	background: #fff;
  	transition: 0.3s;
+ 	text-decoration: none;
+	 color: #000;
  }
 
- #login-div #login-button:hover {
+ #login-button:hover {
  	color: #06c;
  	border-color: #06c;
  	cursor: pointer;

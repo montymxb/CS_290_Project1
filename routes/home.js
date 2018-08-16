@@ -8,8 +8,7 @@ const express = require('express')
 const homeRouter = express.Router()
 
 homeRouter.get('/', function(req, res) {
-	res.redirect('/login')
-	//res.render('home.pug', {title: "Home | Calculance"})
+	res.render('home.pug', {title: "Home | Calculance"})
 })
 
 module.exports = homeRouter

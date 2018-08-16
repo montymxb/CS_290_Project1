@@ -1,4 +1,43 @@
-extends layout
+doctype html
+html
 
-block content
-	div content...
+	// head
+	head
+		meta(charset='utf-8')
+		base(href='/')
+		link(href='css/style.css', type='text/css', rel='stylesheet')
+		link(href='css/login.css', type='text/css', rel='stylesheet')
+		title= title
+	body(style='background:#06c')
+		// content
+		#content
+			div(style='max-width:600px;padding:8px;margin:8px auto;text-align:center;background:#fff')
+				h1(style='color:#fff;background:#06c') Resistor Calculator
+
+				#resistor-container
+					#resistor-circle
+						#resistor-wrap
+							.resistor-login-stub-left
+							.resistor-login
+								.band#band1
+								.band#band2
+								.band#band3
+								.band#band4
+							.resistor-login-stub-right
+
+				a#login-button(href='/login',style='height:auto') Start Calculating Here
+
+				h2(style='border-style:none none solid none;border-color:#06c') Calculate
+				p Enter in colors bands for a 4-band resistor, and our site will calculate the corresponding resistance and tolerance.
+
+				h2(style='border-style:none none solid none;border-color:#06c') History
+				p Previous calculations will be stored and held in your history. There you can see past resistances &amp; tolerances for various combinations you've looked up in the past.
+
+				h2(style='border-style:none none solid none;border-color:#06c') Lookup Parts
+				p Interested in looking up prices for resistors or other electronics parts? Check out our parts section to quickly lookup brands, prices &amp; part numbers that are of interest.
+
+		// footer
+		#footer
+			#footer-content-wrapper
+				p CS 290 Resistor Project, 2018
+		script(type='text/javascript', src='js/script.js')
